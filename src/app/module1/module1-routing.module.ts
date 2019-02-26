@@ -7,11 +7,11 @@ import { Comp3FulllayoutComponent } from './comp3-fulllayout/comp3-fulllayout.co
 
 
 const routes: Routes = [
-    {path:'',redirectTo:'comp1'},
-    {path:'comp1', component:Comp1M1Component},
-    {path:'comp2', component:Comp2M1Component},         
-    {path:'comp3', component:Comp3FulllayoutComponent},         
-    {path:'**', redirectTo:''}
+    {path: '', redirectTo: 'comp1'},
+    {path: 'comp1', component: Comp1M1Component},
+    {path: 'comp2', component: Comp2M1Component, data: [{hideHeader: false}]},
+    {path: 'comp3', component: Comp3FulllayoutComponent},
+    {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
