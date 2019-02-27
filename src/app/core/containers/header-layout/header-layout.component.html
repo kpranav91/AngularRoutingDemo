@@ -1,6 +1,5 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" *ngIf="isShowLoader">
-    <app-header></app-header>
-</nav>
+<app-header *ngIf="isHeaderShown"></app-header>
+
 <div class="container theme-showcase" role="main">
     <router-outlet></router-outlet>
 </div>

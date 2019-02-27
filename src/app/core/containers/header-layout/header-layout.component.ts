@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
 @Component({
@@ -7,20 +7,24 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
   styleUrls: ['./header-layout.component.css']
 })
 export class HeaderLayoutComponent implements OnInit {
-  isShowLoader = true;
+  isHeaderShown = true;
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(private router: Router, private route: ActivatedRoute, private renderer: Renderer2) {
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         console.log('Event ');
         console.log(event);
-        this.isShowLoader = true;
+        this.isHeaderShown = true;
+        renderer.removeClass(document.body, 'hide-header');
         if (route.snapshot.firstChild && route.snapshot.firstChild.children[0].data[0]
           && typeof route.snapshot.firstChild.children[0].data[0].hideHeader !== 'undefined') {
-          console.log('IsHideloader');
-          console.log(route.snapshot.firstChild.children[0].data[0].hideHeader);
-          this.isShowLoader = route.snapshot.firstChild.children[0].data[0].hideHeader;
+          // console.log('isHeaderShown');
+          // console.log(route.snapshot.firstChild.children[0].data[0].hideHeader);
+          this.isHeaderShown = !route.snapshot.firstChild.children[0].data[0].hideHeader;
+          if (this.isHeaderShown === false) {
+            renderer.addClass(document.body, 'hide-header');
+          }
         }
       }
     });
